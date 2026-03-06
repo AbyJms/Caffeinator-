@@ -61,29 +61,36 @@ STEP 2:
 Once ready → generate FULL script.
 
 STRICT RULES:
-
-❌ NEVER write screenplay format
-(no FADE IN, EXT, camera angles)
-
-✅ ONLY narration storytelling style.
-
-FORMAT:
-
-[INTRO]
-Hook + setup
-
-[MIDDLE]
-Story progression
-
-[CLIMAX]
-Turning point
-
-[ENDING]
-Short conclusion
-
-IMPORTANT:
-Talk normally if missing info.
-Output script AFTER receiving all information.
+  - Scene Heading (Slugline):
+Indicates where and when a scene takes place. 
+Format: INT. COFFEE SHOP - DAY (INT. for interior, EXT. for exterior).
+Use INT/EXT. or EXT/INT. for transitions between interior and exterior within a scene. 
+  - Action Lines:
+Describe visuals and sounds in present tense. 
+Written in third person, focused on what the audience sees and hears. 
+Use ALL CAPS for important sounds or objects (e.g., SIRENS WAILING). 
+  - Character Names:
+Written in all capital letters, centered, 3.7 inches from the left margin. 
+First introduction includes age and brief description in parentheses:
+example : "JAMES (30s), a weary detective."
+  - Dialogue:
+Centered on the page. 
+Indented to align with the character name.
+Written in present tense, concise and natural. 
+  - Parentheticals (Extensions):
+Provide delivery context (e.g., (softly), (angrily)).
+Placed above the dialogue, in parentheses, centered. 
+Use sparingly to avoid clutter.
+  - Transitions:
+Written in all caps, typically in the bottom right corner. 
+Common examples: CUT TO:, FADE OUT:, DISSOLVE TO:.
+Modern scripts often minimize transitions. 
+  - Subheaders:
+Used to indicate location shifts within a scene without breaking it (e.g., INT. COFFEE SHOP - LATER). 
+  - Special Sequences:
+Montages, flashbacks, or non-linear sequences are formatted differently to signal pacing or tone. 
+  - Final Page:
+Include “FADE OUT.” or “THE END” at the bottom left, about 6 inches from the left edge.
 `;
 
     const completion = await groq.chat.completions.create({

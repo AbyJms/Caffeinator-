@@ -1,162 +1,120 @@
-function typeMessage(text) {
+const inputBox = document.getElementById("userInput");
+const sendBtn = document.getElementById("sendBtn");
+const messages = document.getElementById("messages");
+const welcome = document.getElementById("welcome");
 
-  const msg = document.createElement("div");
-  msg.classList.add("message", "bot");
-
-  chatArea.appendChild(msg);
-
-  let i = 0;
-
-  const cursor = document.createElement("span");
-  cursor.innerText = "|";
-  cursor.style.marginLeft = "2px";
-
-  msg.appendChild(cursor);
-
-  let interval = setInterval(() => {
-
-    msg.innerText = text.substring(0, i);
-
-    msg.appendChild(cursor);
-
-    i++;
-
-    if (i > text.length) {
-      clearInterval(interval);
-      cursor.remove();
-    }
-
-    chatArea.scrollTop = chatArea.scrollHeight;
-
-  }, 18);
-
-
-}
-
-particlesJS("particles-js", {
-  particles: {
-    number: { value: 70 },
-    size: { value: 2 },
-    color: { value: "#4f7cff" },
-    line_linked: {
-      enable: true,
-      distance: 150,
-      color: "#4f7cff",
-      opacity: 0.2
-    },
-    move: { speed: 1 }
-  }
-});
-
-
-lottie.loadAnimation({
-  container: document.getElementById('aiAnimation'),
-  renderer: 'svg',
-  loop: true,
-  autoplay: true,
-  path: 'https://assets4.lottiefiles.com/packages/lf20_jcikwtux.json'
-});
-
-
-function showThinking() {
-
-  const msg = document.createElement("div");
-
-  msg.classList.add("message", "bot");
-
-  msg.innerHTML = "AI is thinking<span class='dots'></span>";
-
-  chatArea.appendChild(msg);
-
-  return msg;
-
-}
-
-
-document.getElementById("exportBtn").onclick = () => {
-
-  let messages = document.querySelectorAll(".bot");
-
-  let text = "";
-
-  messages.forEach(m => {
-    text += m.innerText + "\n\n";
-  });
-
-  let blob = new Blob([text], { type: "text/plain" });
-
-  let link = document.createElement("a");
-
-  link.href = URL.createObjectURL(blob);
-
-  link.download = "movie_script.txt";
-
-  link.click();
-
-};
-
-document.querySelector('.sidebar .logo').addEventListener('click', () => {
-  window.location.href = '../index.html';
-});
-
-// For testing purposes, you can pre-fill the chat with a message
 let chatHistory = [];
 
-const inputBox = document.querySelector("input");
-const sendBtn = document.querySelector("button");
-const chatArea = document.querySelector(".scriptgen-container");
+/* PARTICLES */
+particlesJS("particles-js", {
+particles:{number:{value:70},size:{value:2},color:{value:"#4f7cff"},
+line_linked:{enable:true,distance:150,color:"#4f7cff",opacity:0.2},
+move:{speed:1}}
+});
 
-async function sendMessage(textFromBtn = null) {
+/* LOTTIE */
+lottie.loadAnimation({
+container:document.getElementById("aiAnimation"),
+renderer:"svg",
+loop:true,
+autoplay:true,
+path:"https://assets4.lottiefiles.com/packages/lf20_jcikwtux.json"
+});
 
-  const message = textFromBtn || inputBox.value.trim();
-  if (!message) return;
+/* MESSAGE UI */
 
-  // 👉 ADD HERE (THIS LINE)
-  document.getElementById("welcome").style.display = "none";
-
-  inputBox.value = "";
-
-  // show user message
-  const userMsg = document.createElement("div");
-  userMsg.classList.add("message", "user");
-  userMsg.innerText = message;
-  chatArea.appendChild(userMsg);
-
-  chatHistory.push({ role: "user", content: message });
-
-  const thinkingMsg = showThinking();
-
-  try {
-    const res = await fetch("http://localhost:3000/api/chat", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        message,
-        history: chatHistory
-      })
-    });
-
-    const data = await res.json();
-
-    thinkingMsg.remove();
-
-    chatHistory.push({ role: "assistant", content: data.reply });
-
-    typeMessage(data.reply);
-
-  } catch (err) {
-    thinkingMsg.innerText = "Error connecting to AI.";
-  }
-
-  chatArea.scrollTop = chatArea.scrollHeight;
+function addUserMessage(text){
+const msg=document.createElement("div");
+msg.className="message user";
+msg.innerText=text;
+messages.appendChild(msg);
 }
 
-sendBtn.onclick = () => sendMessage();
+function addBotMessage(text){
+const msg=document.createElement("div");
+msg.className="message bot";
+msg.innerText=text;
+messages.appendChild(msg);
+}
 
-inputBox.addEventListener("keypress", e => {
-  if (e.key === "Enter") sendMessage();
+function showThinking(){
+const msg=document.createElement("div");
+msg.className="message bot";
+msg.innerText="AI is thinking...";
+messages.appendChild(msg);
+return msg;
+}
+
+/* SEND */
+
+async function sendMessage(textFromBtn=null){
+
+const message=textFromBtn || inputBox.value.trim();
+if(!message) return;
+
+welcome.style.display="none";
+
+addUserMessage(message);
+inputBox.value="";
+
+chatHistory.push({role:"user",content:message});
+
+const thinking=showThinking();
+
+try{
+const res=await fetch("http://localhost:3000/api/chat",{
+method:"POST",
+headers:{"Content-Type":"application/json"},
+body:JSON.stringify({message,history:chatHistory})
 });
 
-document.querySelectorAll(".suggestion").forEach(btn => {
-  btn.onclick = () => sendMessage(btn.innerText);
+const data=await res.json();
+
+thinking.remove();
+
+chatHistory.push({role:"assistant",content:data.reply});
+addBotMessage(data.reply);
+
+}catch{
+thinking.innerText="Error connecting to AI.";
+}
+
+messages.scrollTop=messages.scrollHeight;
+}
+
+/* EVENTS */
+
+sendBtn.onclick=()=>sendMessage();
+/*
+inputBox.addEventListener("keydown",e=>{
+if(e.key==="Enter"){
+e.preventDefault();
+sendMessage();
+}
 });
+*/
+
+inputBox.addEventListener("keydown", e => {
+  if (e.key === "Enter" && !e.shiftKey) {
+    e.preventDefault();
+    sendMessage();
+  }
+});
+
+document.querySelectorAll(".suggestion").forEach(btn=>{
+btn.onclick=()=>sendMessage(btn.innerText);
+});
+
+/* EXPORT */
+
+document.getElementById("exportBtn").onclick=()=>{
+let text="";
+document.querySelectorAll(".bot").forEach(m=>{
+text+=m.innerText+"\n\n";
+});
+const blob=new Blob([text],{type:"text/plain"});
+const link=document.createElement("a");
+link.href=URL.createObjectURL(blob);
+link.download="movie_script.txt";
+link.click();
+};
