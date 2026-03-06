@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MovCap - Login</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        .login-hero {
+            min-height: 80vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: radial-gradient(circle at center, #3b0f5e 0%, #05060a 60%);
+            padding: 40px 20px;
+        }
+
+        .login-card {
+            background: #0b0d16;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 18px;
+            padding: 50px 40px;
+            width: 100%;
+            max-width: 420px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            transition: 0.3s;
+        }
+
+        .login-card:hover {
+            border-color: rgba(79, 140, 255, 0.5);
+            box-shadow: 0 10px 40px rgba(79, 140, 255, 0.2);
+        }
+
+        .login-card h2 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .login-card h2 span {
+            color: #4f8cff;
+            animation: glow 5s infinite ease-in-out;
+        }
+
+        .login-card p {
+            color: #b0b6c3;
+            font-size: 14px;
+            margin-bottom: 30px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 14px;
+            color: #b0b6c3;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 14px 16px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            color: white;
+            font-size: 15px;
+            outline: none;
+            transition: 0.3s;
+            font-family: "Poppins", sans-serif;
+        }
+
+        .input-group input:focus {
+            border-color: #4f8cff;
+            background: rgba(79, 140, 255, 0.05);
+            box-shadow: 0 0 15px rgba(79, 140, 255, 0.15);
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 14px;
+            border-radius: 12px;
+            border: none;
+            background: linear-gradient(135deg, #4f8cff, #8f5cff);
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(79, 140, 255, 0.4);
+            margin-top: 10px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 25px rgba(79, 140, 255, 0.6);
+        }
+
+        .login-links {
+            margin-top: 25px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+        }
+
+        .login-links a {
+            color: #b0b6c3;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .login-links a:hover {
+            color: #4f8cff;
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            margin: 25px 0;
+            color: #7a8191;
+            font-size: 13px;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .divider:not(:empty)::before {
+            margin-right: .25em;
+        }
+
+        .divider:not(:empty)::after {
+            margin-left: .25em;
+        }
+
+        .social-login {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .social-btn {
+            flex: 1;
+            padding: 12px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.03);
+            color: white;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .social-btn:hover {
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateY(-2px);
+        }
+
+        .signup-text {
+            margin-top: 30px;
+            font-size: 14px;
+            color: #b0b6c3;
+        }
+
+        .signup-text a {
+            color: #4f8cff;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .signup-text a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+
+
+
+    <section class="login-hero">
+        <div class="login-card">
+            <h2>Welcome <span>Back</span></h2>
+            <p>Log in to access your saved recap scripts.</p>
+
+            <form>
+                <div class="input-group">
+                    <label for="email">Email address</label>
+                    <input type="email" id="email" placeholder="name@example.com" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" placeholder="••••••••" required>
+                </div>
+
+                <div class="login-links">
+                    <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; color: #b0b6c3;">
+                        <input type="checkbox" style="width: auto; cursor: pointer;"> Remember me
+                    </label>
+                    <a href="#">Forgot password?</a>
+                </div>
+
+                <button type="submit" class="login-btn">Log In</button>
+            </form>
+
+            <div class="divider">or continue with</div>
+
+            <div class="social-login">
+                <button class="social-btn">
+                    <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google" width="18" height="18">
+                    Google
+                </button>
+                <button class="social-btn" style="color: white;">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                            d="M12 0C5.372 0 0 5.372 0 12C0 17.304 3.438 21.8 8.205 23.387C8.805 23.498 9.025 23.125 9.025 22.812C9.025 22.532 9.014 21.782 9.008 20.801C5.669 21.527 4.965 19.191 4.965 19.191C4.419 17.803 3.633 17.433 3.633 17.433C2.545 16.689 3.715 16.704 3.715 16.704C4.919 16.789 5.552 17.94 5.552 17.94C6.621 19.771 8.356 19.243 9.048 18.938C9.156 18.156 9.471 17.629 9.818 17.324C7.152 17.02 4.35 15.989 4.35 11.365C4.35 10.048 4.82 8.969 5.592 8.125C5.468 7.822 5.053 6.593 5.71 4.935C5.71 4.935 6.723 4.61 9.004 6.155C9.967 5.887 10.999 5.753 12.022 5.748C13.044 5.753 14.076 5.887 15.041 6.155C17.32 4.61 18.331 4.935 18.331 4.935C18.989 6.593 18.576 7.822 18.452 8.125C19.225 8.969 19.693 10.048 19.693 11.365C19.693 15.999 16.888 17.017 14.215 17.316C14.646 17.689 15.031 18.423 15.031 19.544C15.031 21.15 15.019 22.443 15.019 22.812C15.019 23.128 15.236 23.504 15.845 23.385C20.559 21.796 23.998 17.303 23.998 12C23.998 5.372 18.627 0 12 0Z" />
+                    </svg>
+                    GitHub
+                </button>
+            </div>
+
+            <div class="signup-text">
+                Don't have an account? <a href="#">Sign up</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+
+        <a href="index.html" class="footer-logo" style="text-decoration: none;">
+            <div class="logo-circle">M</div>
+            MovCap
+        </a>
+
+        <div>
+            © 2026 MovCap. All rights reserved.
+        </div>
+
+    </footer>
+
+    <script src="main.js"></script>
+</body>
+
+</html>

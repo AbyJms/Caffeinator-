@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MovCap ScriptGen</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
+  </head>
+
+  <body>
+    <nav>
+      <div class="logo">MovCap</div>
+      <button class="login-btn">Login</button>
+    </nav>
+
+    <main id="mainContainer">
+      <h1 id="mainTitle">AI Movie Script Generator</h1>
+      <p class="subtitle" id="mainSubtitle">
+        Generate cinematic recap scripts instantly using AI
+      </p>
+
+      <div class="grid" id="originalGrid">
+        <div
+          class="symptom-card"
+          onclick="openChat('Generate script for Aadu')"
+        >
+          <h3>Funny Recap</h3>
+          <p>Generate chaotic humorous movie recap scripts.</p>
+        </div>
+
+        <div
+          class="symptom-card"
+          onclick="openChat('Generate dark cinematic recap')"
+        >
+          <h3>Dark Cinematic</h3>
+          <p>Create serious narration-style scripts.</p>
+        </div>
+
+        <div
+          class="symptom-card"
+          onclick="openChat('Generate emotional recap')"
+        >
+          <h3>Emotional</h3>
+          <p>Story-focused dramatic scripts.</p>
+        </div>
+      </div>
+
+      <div class="split-layout" id="splitLayout">
+        <div class="side-column" id="leftCol"></div>
+        <div class="center-column" id="centerCol"></div>
+        <div class="side-column" id="rightCol"></div>
+      </div>
+    </main>
+
+    <div class="chat-icon" onclick="toggleSplitMode()">🩺</div>
+
+    <div class="chat-box" id="chatBox">
+      <div class="chat-header">
+        <span>MovCap ScriptGen</span>
+        <span class="close-btn" onclick="toggleSplitMode()">×</span>
+      </div>
+
+      <div class="chat-body" id="chatBody">
+        <div class="chat-message" style="text-align: left; background: #f1f9ff">
+          Hi, I'm MovCap ScriptGen. How can I help you today?
+        </div>
+      </div>
+
+      <div class="chat-input">
+        <input
+          type="text"
+          id="userInput"
+          placeholder="Ask for a movie script..."
+        />
+        <button onclick="sendMessage()" class="send-btn">➤</button>
+      </div>
+    </div>
+
+    <div class="modal-overlay" id="loginModal">
+      <div class="modal-box">
+        <span class="close-btn" onclick="toggleLogin()">×</span>
+        <h2>Welcome!</h2>
+
+        <div class="input-group">
+          <label>Name/UserName</label>
+          <input type="text" placeholder="Enter your name" id="loginName" />
+        </div>
+
+        <div class="input-group">
+          <label>Password</label>
+          <input type="password" placeholder="Enter password" id="loginPass" />
+        </div>
+
+        <button class="signin-btn" onclick="submitLogin()">
+          Sign In / Sign Up
+        </button>
+      </div>
+    </div>
+  </body>
+</html>
