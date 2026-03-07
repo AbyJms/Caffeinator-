@@ -145,17 +145,37 @@ document.querySelectorAll(".suggestion").forEach(btn => {
   btn.onclick = () => sendMessage(btn.innerText);
 });
 
-/* EXPORT */
+/* ================= EXPORT TXT ================= */
 
-document.getElementById("exportBtn").onclick = () => {
+const exportBtn = document.getElementById("exportBtn");
+
+exportBtn.addEventListener("click", () => {
+
+  const botMessages = document.querySelectorAll(".bot");
+
+  if (!botMessages.length) {
+    alert("Nothing to export.");
+    return;
+  }
+
   let text = "";
-  document.querySelectorAll(".bot").forEach(m => {
-    text += m.innerText + "\n\n";
+
+  botMessages.forEach(msg => {
+    text += msg.innerText + "\n\n";
   });
 
-  const blob = new Blob([text], { type: "text/plain" });
-  const link = document.createElement("a");
-  link.href = URL.createObjectURL(blob);
-  link.download = "movie_script.txt";
-  link.click();
-};
+  const blob = new Blob([text], { type: "text/plain;charset=utf-8" });
+
+  const url = URL.createObjectURL(blob);
+
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "ScriptGen_output.txt";
+
+  document.body.appendChild(a);
+  a.click();
+
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+
+});

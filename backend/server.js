@@ -38,7 +38,7 @@ RULES:
 • cover full story timeline  
 • include comedy, action, emotional, climax  
 
-choose about 20 timestamps.
+choose 30 timestamps.
 
 FORMAT:
 
