@@ -1,92 +1,85 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>ScriptGen</title>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="stylesheet" href="../css/scriptgen.css" />
+  <title>ScriptGen</title>
 
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap"
-      rel="stylesheet"
-    />
+  <link rel="stylesheet" href="../css/scriptgen.css" />
 
-    <!-- PARTICLES -->
-    <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
 
-    <!-- LOTTIE -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.9.6/lottie.min.js"></script>
-  </head>
+  <!-- PARTICLES -->
+  <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
 
-  <body>
-    <div id="particles-js"></div>
+  <!-- LOTTIE -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.9.6/lottie.min.js"></script>
+</head>
 
-    <div class="container">
-      <!-- SIDEBAR -->
-      <div class="sidebar">
-        <div class="logo">
-          <div class="logo-icon">M</div>
-          <span>MovCap</span>
-        </div>
+<body>
+  <div id="particles-js"></div>
 
-        <button class="new-script glow-btn">+ New Script</button>
-
-        <button
-          class="story-btn"
-          onclick="window.location.href = '../pages/storyboard.html'"
-        >
-          Go to Story →
-        </button>
-
-        <div class="history">
-          <h4>History</h4>
-          <ul id="historyList"></ul>
-        </div>
+  <div class="container">
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+      <div class="logo" onclick="window.location.href = '../index.html'">
+        <div class="logo-icon">M</div>
+        <span>MovCap</span>
       </div>
 
-      <!-- MAIN -->
-      <div class="main">
-        <div class="header">
-          ScriptGen
-          <button id="exportBtn">Export Script</button>
-        </div>
+      <button class="new-script glow-btn">+ New Script</button>
 
-        <!-- CHAT AREA -->
-        <div class="chat-area">
-          <div id="messages"></div>
+      <button class="story-btn" onclick="window.location.href = '../pages/storyboard.html'">
+        Go to Story →
+      </button>
 
-          <div class="welcome" id="welcome">
-            <div id="aiAnimation" style="width: 120px; margin: auto"></div>
-
-            <h1>Welcome to <span>ScriptGen</span></h1>
-
-            <p>
-              Enter a movie name, tone, or instructions to generate a cinematic
-              recap script.
-            </p>
-
-            <div class="suggestions">
-              <button class="suggestion">Inception</button>
-              <button class="suggestion">Interstellar</button>
-              <button class="suggestion">The Dark Knight</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- INPUT -->
-        <div class="input-bar">
-          <input
-            id="userInput"
-            placeholder="Enter movie name, tone, or instructions..."
-          />
-
-          <button id="sendBtn">➤</button>
-        </div>
+      <div class="history">
+        <h4>History</h4>
+        <ul id="historyList"></ul>
       </div>
     </div>
 
-    <script src="../js/scriptgen.js"></script>
-  </body>
+    <!-- MAIN -->
+    <div class="main">
+      <div class="header">
+        ScriptGen
+        <button id="exportBtn">Export Script</button>
+      </div>
+
+      <!-- CHAT AREA -->
+      <div class="chat-area">
+        <div id="messages"></div>
+
+        <div class="welcome" id="welcome">
+          <div id="aiAnimation" style="width: 120px; margin: auto"></div>
+
+          <h1>Welcome to <span>ScriptGen</span></h1>
+
+          <p>
+            Enter a movie name, tone, or instructions to generate a cinematic
+            recap script.
+          </p>
+
+          <div class="suggestions">
+            <button class="suggestion">Inception</button>
+            <button class="suggestion">Interstellar</button>
+            <button class="suggestion">The Dark Knight</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- INPUT -->
+      <div class="input-bar">
+        <input id="userInput" placeholder="Enter movie name, tone, or instructions..." />
+
+        <button id="sendBtn">➤</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/scriptgen.js"></script>
+</body>
+
 </html>
