@@ -55,7 +55,9 @@ Ask short questions to collect:
 • Genre
 • Tone (funny, dark, emotional, chaotic)
 • Length (short / medium / detailed)
+• What does the movie revolve around?
 • Any specific scenes or characters to focus on?
+
 
 STEP 2:
 Once ready → generate FULL script.
