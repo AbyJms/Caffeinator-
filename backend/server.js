@@ -5,7 +5,7 @@ require('dotenv').config();
 const Groq = require("groq-sdk");
 
 const groq = new Groq({
-  apiKey: process.env.GROQ_API_KEY,
+  apiKey: "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",
 });
 
 const { Pool } = require('pg');
@@ -14,15 +14,15 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 const pool = new Pool({
-    connectionString: process.env.DATABASE_URL,
+  connectionString: "postgresql://postgres.hvremodwbonzunlujlde:annhridya456@aws-1-ap-south-1.pooler.supabase.com:6543/postgres",
 });
 
 pool.connect((err) => {
-    if (err) {
-        console.error('Error connecting to the database:', err.stack);
-    } else {
-        console.log('Successfully connected to the PostgreSQL database.');
-    }
+  if (err) {
+    console.error('Error connecting to the database:', err.stack);
+  } else {
+    console.log('Successfully connected to the PostgreSQL database.');
+  }
 });
 
 app.use(cors());
@@ -31,11 +31,11 @@ app.use(express.static(path.join(__dirname, '../frontend'), { index: false }));
 
 // Fallback to index.html if root is requested
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '../frontend/index.html'));
+  res.sendFile(path.join(__dirname, '../frontend/index.html'));
 });
 
 app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
+  console.log(`Server is running on http://localhost:${PORT}`);
 });
 
 app.post("/api/chat", async (req, res) => {
