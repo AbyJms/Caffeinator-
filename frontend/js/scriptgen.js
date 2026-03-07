@@ -8,7 +8,9 @@ let chatHistory = [];
 /* PARTICLES */
 particlesJS("particles-js", {
   particles: {
-    number: { value: 70 }, size: { value: 2 }, color: { value: "#4f7cff" },
+    number: { value: 70 },
+    size: { value: 2 },
+    color: { value: "#4f7cff" },
     line_linked: { enable: true, distance: 150, color: "#4f7cff", opacity: 0.2 },
     move: { speed: 1 }
   }
@@ -23,7 +25,7 @@ lottie.loadAnimation({
   path: "https://assets4.lottiefiles.com/packages/lf20_jcikwtux.json"
 });
 
-/* MESSAGE UI */
+/* UI HELPERS */
 
 function addUserMessage(text) {
   const msg = document.createElement("div");
@@ -47,7 +49,7 @@ function showThinking() {
   return msg;
 }
 
-/* SEND */
+/* ✅ MAIN FUNCTION (SCREENGEN ONLY) */
 
 async function sendMessage(textFromBtn = null) {
 
@@ -59,22 +61,20 @@ async function sendMessage(textFromBtn = null) {
   addUserMessage(message);
   inputBox.value = "";
 
-  chatHistory.push({ role: "user", content: message });
-
   const thinking = showThinking();
 
   try {
-    const res = await fetch("http://localhost:3000/api/chat", {
+
+    /* 👉 ONLY SEND MESSAGE (NO HISTORY NEEDED) */
+    const res = await fetch("/api/chat", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ message, history: chatHistory })
+      body: JSON.stringify({ message })
     });
 
     const data = await res.json();
 
     thinking.remove();
-
-    chatHistory.push({ role: "assistant", content: data.reply });
     addBotMessage(data.reply);
 
   } catch {
@@ -82,6 +82,42 @@ async function sendMessage(textFromBtn = null) {
   }
 
   messages.scrollTop = messages.scrollHeight;
+}
+
+/* ✅ SCREENGEN FILE UPLOAD FUNCTION */
+
+async function runScreenGen(){
+
+  const fileInput = document.getElementById("subtitleUpload");
+
+  if(!fileInput.files.length){
+    alert("Upload subtitle (.srt) first");
+    return;
+  }
+
+  welcome.style.display = "none";
+
+  const thinking = showThinking();
+
+  const formData = new FormData();
+  formData.append("file", fileInput.files[0]);
+
+  try {
+
+    const res = await fetch("/api/screengen", {
+      method: "POST",
+      body: formData
+    });
+
+    const data = await res.json();
+
+    thinking.remove();
+    addBotMessage(data.reply);
+
+  } catch {
+    thinking.innerText = "ScreenGen failed.";
+  }
+
 }
 
 /* EVENTS */
@@ -95,14 +131,6 @@ document.querySelector(".new-script").onclick = () => {
 };
 
 sendBtn.onclick = () => sendMessage();
-/*
-inputBox.addEventListener("keydown",e=>{
-if(e.key==="Enter"){
-e.preventDefault();
-sendMessage();
-}
-});
-*/
 
 inputBox.addEventListener("keydown", e => {
   if (e.key === "Enter" && !e.shiftKey) {
@@ -110,6 +138,8 @@ inputBox.addEventListener("keydown", e => {
     sendMessage();
   }
 });
+
+/* suggestion buttons (Aadu etc) */
 
 document.querySelectorAll(".suggestion").forEach(btn => {
   btn.onclick = () => sendMessage(btn.innerText);
@@ -122,6 +152,7 @@ document.getElementById("exportBtn").onclick = () => {
   document.querySelectorAll(".bot").forEach(m => {
     text += m.innerText + "\n\n";
   });
+
   const blob = new Blob([text], { type: "text/plain" });
   const link = document.createElement("a");
   link.href = URL.createObjectURL(blob);
