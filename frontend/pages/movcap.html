@@ -1,46 +1,42 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<title>MovCap - Generate Movie Recap</title>
+    <title>MovCap - Generate Movie Recap</title>
 
+<<<<<<< HEAD
 <link rel="stylesheet" href="../css/scriptgen.css">
+=======
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+>>>>>>> 99587692bfac4fb90eb5d0c868eb2c4d354fa1b2
 
-</head>
+  <body>
+    <nav class="navbar">
+      <div class="logo">MovCap</div>
 
-<body>
-
-<nav class="navbar">
-    <div class="logo">MovCap</div>
-
-    <ul>
+      <ul>
         <li><a href="index.html">Home</a></li>
         <li><a href="scriptgen.html">ScriptGen</a></li>
-    </ul>
-</nav>
+      </ul>
+    </nav>
 
+    <section class="movcap-container">
+      <h1>MovCap Generator</h1>
+      <p>Generate cinematic movie recap scripts instantly.</p>
 
-<section class="movcap-container">
+      <textarea
+        id="movieInput"
+        placeholder="Enter movie name or description..."
+      ></textarea>
 
-<h1>MovCap Generator</h1>
-<p>Generate cinematic movie recap scripts instantly.</p>
+      <button onclick="generateMovcap()">Generate Recap</button>
 
-<textarea
-id="movieInput"
-placeholder="Enter movie name or description..."
-></textarea>
+      <div id="result"></div>
+    </section>
 
-<button onclick="generateMovcap()">
-Generate Recap
-</button>
-
-<div id="result"></div>
-
-</section>
-
-<script src="movcap.js"></script>
-
-</body>
+    <script src="movcap.js"></script>
+  </body>
 </html>
