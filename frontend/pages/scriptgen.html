@@ -76,10 +76,23 @@
         </div>
 
         <!-- INPUT -->
-        <div class="input-bar">
+        <!-- <div class="input-bar">
           <input type="file" id="subtitleUpload" accept=".srt" />
-          <button onclick="runScreenGen()">Find Best Scenes</button>
-        </div>
+          <button onclick="runScreenGen()">➤</button>
+        </div> -->
+
+        <div class="input-wrapper">
+
+  <label class="action-btn upload-btn">
+    <input type="file" id="subtitleUpload" accept=".srt">
+    📂 Upload Subtitle
+  </label>
+
+  <button class="action-btn generate-btn" onclick="runScreenGen()">
+    Generate ➤
+  </button>
+
+</div>
       </div>
     </div>
 
