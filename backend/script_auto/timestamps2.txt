@@ -1,21 +1,27 @@
-00:01:31
-00:04:58
-00:08:24
-00:10:10
-00:16:02
-00:19:22
-00:21:00
-00:25:35
-00:29:03
-00:32:44
-00:39:13
-00:45:22
-00:51:17
-01:04:29
-01:12:30
-01:20:20
-01:29:24
-01:37:31
-01:43:54
-01:51:49
-01:58:23
+00:01:40 — intro
+00:05:10 — protagonist intro
+00:10:20 — conflict setup
+00:15:50 — supporting character intro
+00:20:30 — inciting incident
+00:25:40 — comedy moment
+00:31:10 — action scene
+00:36:20 — plot progression
+00:41:30 — twist
+00:46:40 — character development
+00:52:00 — emotional moment
+00:57:20 — chase scene
+01:02:40 — fight scene
+01:08:00 — plot thickening
+01:13:20 — climax buildup
+01:18:40 — intense action
+01:24:00 — emotional turning point
+01:29:20 — plot reveal
+01:34:40 — final confrontation
+01:40:00 — chaos moment
+01:45:20 — resolution start
+01:50:40 — final fight
+01:55:50 — climax moment
+02:01:10 — resolution
+02:06:30 — ending scene
+02:11:40 — final shot
+02:16:50 — conclusion

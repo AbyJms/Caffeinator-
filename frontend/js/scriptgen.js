@@ -147,35 +147,35 @@ document.querySelectorAll(".suggestion").forEach(btn => {
 
 /* ================= EXPORT TXT ================= */
 
-const exportBtn = document.getElementById("exportBtn");
+async function exportScript() {
+    const text = document.getElementById("messages").innerText;
 
-exportBtn.addEventListener("click", () => {
+    if (!text) {
+        alert("No script to export!");
+        return;
+    }
 
-  const botMessages = document.querySelectorAll(".bot");
+    let filename = prompt("Enter a name for the script file:");
+    if (!filename) {
+        alert("Export cancelled - No name provided.");
+        return;
+    }
 
-  if (!botMessages.length) {
-    alert("Nothing to export.");
-    return;
-  }
+    try {
+        const response = await fetch("/api/save-script", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ filename, content: text })
+        });
 
-  let text = "";
-
-  botMessages.forEach(msg => {
-    text += msg.innerText + "\n\n";
-  });
-
-  const blob = new Blob([text], { type: "text/plain;charset=utf-8" });
-
-  const url = URL.createObjectURL(blob);
-
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = "ScriptGen_output.txt";
-
-  document.body.appendChild(a);
-  a.click();
-
-  document.body.removeChild(a);
-  URL.revokeObjectURL(url);
-
-});
+        const data = await response.json();
+        if (response.ok) {
+            alert(data.message);
+        } else {
+            alert(data.error || "Save failed.");
+        }
+    } catch (err) {
+        console.error("Export error:", err);
+        alert("An error occurred during export.");
+    }
+}
