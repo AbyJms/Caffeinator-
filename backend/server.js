@@ -206,3 +206,67 @@ app.get("/run-frame-grabber", (req, res) => {
     res.send(stdout || "Frame grabber executed");
   });
 });
+
+app.get("/get-frames", (req, res) => {
+  const framesDir = __dirname + "/screenshots";
+
+  const fs = require("fs");
+
+  fs.readdir(framesDir, (err, files) => {
+    if (err) return res.status(500).send("Cannot read frames");
+
+    const images = files
+      .filter(f => f.endsWith(".png"))
+      .slice(0, 12) // only 12
+      .map(f => `/screenshots/${f}`);
+
+    res.json(images);
+  });
+});
+
+// serve screenshots folder
+app.use("/screenshots", require("express").static(__dirname + "/screenshots"));
+
+
+app.post("/generate-storyboard", async (req, res) => {
+
+try {
+
+const idea = req.body.idea;
+
+const completion = await groq.chat.completions.create({
+model: "llama-3.3-70b-versatile",
+
+messages: [{
+role: "user",
+content: `Create a cinematic storyboard with 12 scenes.
+
+Return ONLY this format:
+
+Scene 1: description
+Scene 2: description
+Scene 3: description
+Scene 4: description
+Scene 5: description
+Scene 6: description
+Scene 7: description
+Scene 8: description
+Scene 9: description
+Scene 10: description
+Scene 11: description
+Scene 12: description
+
+Story idea: ${idea}`
+}]
+});
+
+res.json(completion);
+
+} catch (err) {
+
+console.error(err);
+res.status(500).send("Storyboard failed");
+
+}
+
+});

@@ -9,7 +9,7 @@ del clip*.mkv 2>nul
 del list.txt 2>nul
 del final_video.mkv 2>nul
 
-for /f %%a in (timestamps.txt) do (
+for /f %%a in (timestamps1.txt) do (
     set clip=clip!i!.mkv
     echo Creating !clip!
     ffmpeg -y -ss %%a -t %duration% -i "%input%" -c copy "!clip!"
