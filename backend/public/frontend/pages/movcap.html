@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>ScriptGen - Generate Movie Script</title>
+
+<link rel="stylesheet" href="../css/movcap.css">
+
+  <body>
+    <nav class="navbar">
+      <div class="logo" onclick="window.location.href = '../index.html'">ScriptGen</div>
+
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="scriptgen.html">ScriptGen</a></li>
+      </ul>
+    </nav>
+
+    <section class="movcap-container">
+      <h1>Script Generator</h1>
+      <p>Generate cinematic movie scripts instantly.</p>
+
+      <textarea
+        id="movieInput"
+        placeholder="Enter movie name or description..."
+      ></textarea>
+
+      <button onclick="generateMovcap()">Generate Script</button>
+
+      <div id="result"></div>
+    </section>
+
+    <script src="movcap.js"></script>
+  </body>
+</html>

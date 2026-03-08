@@ -1,0 +1,256 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    background: #0f0f13;
+    color: white;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.container {
+    display: flex;
+    height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 260px;
+    background: rgba(18, 18, 24, 0.95);
+    padding: 24px;
+    border-right: 1px solid rgba(255, 255, 255, 0.05);
+    display: flex;
+    flex-direction: column;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 30px;
+    font-weight: 600;
+    font-size: 18px;
+    cursor: pointer;
+    color: white;
+}
+
+.logo-icon {
+    background: linear-gradient(135deg, #5b6df9, #8c5bf9);
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.glow-btn {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background: linear-gradient(90deg, #5b6df9, #8c5bf9);
+    color: white;
+    font-weight: 500;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-bottom: 15px;
+}
+
+.glow-btn:hover {
+    opacity: 0.9;
+    box-shadow: 0 0 15px rgba(91, 109, 249, 0.4);
+}
+
+.story-btn {
+    width: 100%;
+    padding: 12px;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    color: rgba(255, 255, 255, 0.7);
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.story-btn:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: white;
+}
+
+.history {
+    margin-top: 30px;
+    flex: 1;
+}
+
+.history h4 {
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 12px;
+    font-weight: 500;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+}
+
+.history li {
+    list-style: none;
+    padding: 10px 0;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.6);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.history li:hover {
+    color: white;
+}
+
+.hist-icon {
+    opacity: 0.5;
+}
+
+/* Main Content */
+.main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background: #0f0f13;
+}
+
+.header {
+    padding: 24px;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.header span {
+    color: #5b6df9;
+}
+
+.chat-area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+}
+
+.welcome {
+    text-align: center;
+    max-width: 600px;
+}
+
+.welcome .floating-icon {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #5b6df9, #8c5bf9);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 24px;
+    box-shadow: 0 10px 30px rgba(91, 109, 249, 0.3);
+}
+
+.welcome h1 {
+    font-size: 32px;
+    margin-bottom: 16px;
+    font-weight: 600;
+}
+
+.welcome h1 span {
+    color: #5b6df9;
+}
+
+.welcome p {
+    color: rgba(255, 255, 255, 0.6);
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+.suggestions {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+}
+
+.suggestions button {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.7);
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.suggestions button:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.2);
+    color: white;
+}
+
+/* Input Bar */
+.input-bar {
+    padding: 24px 40px;
+    display: flex;
+    gap: 12px;
+    max-width: 900px;
+    margin: 0 auto;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.input-bar input {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 16px 20px;
+    border-radius: 12px;
+    color: white;
+    font-size: 15px;
+    outline: none;
+    transition: 0.3s;
+}
+
+.input-bar input:focus {
+    border-color: #5b6df9;
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.input-bar input::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.send-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    width: 52px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.send-btn:hover {
+    background: #5b6df9;
+}
+
+#particles-js {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
