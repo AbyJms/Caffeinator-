@@ -170,6 +170,11 @@
     </footer>
 
     <script>
+        // Redirect if already logged in
+        if (localStorage.getItem('token')) {
+            window.location.href = 'index.html';
+        }
+
         document.getElementById('register-form').addEventListener('submit', async (e) => {
             e.preventDefault();
             const name = document.getElementById('name').value;

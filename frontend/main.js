@@ -4,6 +4,25 @@ document.addEventListener('DOMContentLoaded', () => {
         window.location.href = path;
     };
 
+    // Auth State Handling
+    const loginBtn = document.getElementById('nav-btn-login');
+    const token = localStorage.getItem('token');
+
+    if (token && loginBtn) {
+        loginBtn.textContent = 'Logout';
+        loginBtn.removeAttribute('onclick');
+        loginBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const confirmLogout = confirm('Do you really want to logout?');
+            if (confirmLogout) {
+                localStorage.removeItem('token');
+                localStorage.removeItem('user');
+                alert('You have been logged out.');
+                window.location.href = 'index.html';
+            }
+        });
+    }
+
     // ScriptGen Buttons
     const scriptgenBtns = [
         document.getElementById('nav-link-scriptgen'),

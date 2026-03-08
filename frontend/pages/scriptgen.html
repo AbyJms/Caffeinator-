@@ -44,6 +44,8 @@
           <h4>History</h4>
           <ul id="historyList"></ul>
         </div>
+
+        <button id="sidebar-logout" class="logout-btn" style="margin-top: auto; background: rgba(255, 0, 0, 0.1); color: #ff4f4f; border: 1px solid rgba(255, 0, 0, 0.2); padding: 10px; border-radius: 8px; cursor: pointer; display: none;">Logout</button>
       </div>
 
       <!-- MAIN -->
@@ -96,6 +98,21 @@
       </div>
     </div>
 
+    <script>
+      // Auth & Logout Logic
+      const logoutBtn = document.getElementById('sidebar-logout');
+      if (localStorage.getItem('token')) {
+          logoutBtn.style.display = 'block';
+          logoutBtn.addEventListener('click', () => {
+              if (confirm('Do you really want to logout?')) {
+                  localStorage.removeItem('token');
+                  localStorage.removeItem('user');
+                  alert('You have been logged out.');
+                  window.location.href = '../index.html';
+              }
+          });
+      }
+    </script>
     <script src="../js/scriptgen.js"></script>
   </body>
 </html>
