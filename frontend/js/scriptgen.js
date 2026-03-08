@@ -147,9 +147,7 @@ document.querySelectorAll(".suggestion").forEach(btn => {
 
 /* ================= EXPORT TXT ================= */
 
-function exportScript() {
-
-    // Get the generated AI text
+async function exportScript() {
     const text = document.getElementById("messages").innerText;
 
     if (!text) {
@@ -157,20 +155,27 @@ function exportScript() {
         return;
     }
 
-    // Create timestamp
-    const timestamp = new Date().toISOString().replace(/[:.]/g, "-");
+    let filename = prompt("Enter a name for the script file:");
+    if (!filename) {
+        alert("Export cancelled - No name provided.");
+        return;
+    }
 
-    // Create file
-    const blob = new Blob([text], { type: "text/plain" });
+    try {
+        const response = await fetch("/api/save-script", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ filename, content: text })
+        });
 
-    // Create download link
-    const link = document.createElement("a");
-    link.href = URL.createObjectURL(blob);
-    link.download = timestamp + ".txt";
-
-    // Trigger download
-    link.click();
-
-    // Cleanup
-    URL.revokeObjectURL(link.href);
-}
+        const data = await response.json();
+        if (response.ok) {
+            alert(data.message);
+        } else {
+            alert(data.error || "Save failed.");
+        }
+    } catch (err) {
+        console.error("Export error:", err);
+        alert("An error occurred during export.");
+    }
+}
