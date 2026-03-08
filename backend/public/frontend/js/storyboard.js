@@ -8,7 +8,7 @@ output.innerHTML = "Generating storyboard...";
 try {
 
 // ✅ CALL BACKEND ONLY
-const response = await fetch("http://localhost:3000/generate-storyboard", {
+const response = await fetch("/generate-storyboard", {
 method: "POST",
 headers: { "Content-Type": "application/json" },
 body: JSON.stringify({ idea })
@@ -25,10 +25,10 @@ return;
 const text = data.choices[0].message.content;
 
 // 🔥 RUN PYTHON (screenshots)
-await fetch("http://localhost:3000/run-frame-grabber");
+await fetch("/run-frame-grabber");
 
 // 🔥 GET SCREENSHOTS
-const frameRes = await fetch("http://localhost:3000/get-frames");
+const frameRes = await fetch("/get-frames");
 const frames = await frameRes.json();
 
 displayScenes(text, frames);
