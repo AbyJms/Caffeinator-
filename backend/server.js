@@ -17,7 +17,10 @@ const JWT_SECRET = process.env.JWT_SECRET || "fallback_secret";
 
 app.use(cors());
 app.use(express.json());
-app.use(express.static(path.join(__dirname, "../frontend"), { index: false }));
+app.use(express.static(path.join(__dirname, "public/frontend")));
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "public/frontend/index.html"));
+});
 
 /* ================= DATABASE ================= */
 
