@@ -351,6 +351,68 @@ content: `
 
 });
 
+app.post("/api/save-script-auto", async (req, res) => {
+  const { content } = req.body;
+  if (!content) return res.status(400).send("No content");
+
+  const dir = path.join(__dirname, "script_auto");
+  const file1 = path.join(dir, "timestamp1.txt");
+  const file2 = path.join(dir, "timestamp2.txt");
+
+  try {
+    if (!fs.existsSync(dir)) {
+      fs.mkdirSync(dir, { recursive: true });
+    }
+
+    let targetFile = file1;
+    const exists1 = fs.existsSync(file1);
+    const exists2 = fs.existsSync(file2);
+
+    if (exists1 && exists2) {
+      const stats1 = fs.statSync(file1);
+      const stats2 = fs.statSync(file2);
+      // Overwrite the older file
+      targetFile = stats1.mtime < stats2.mtime ? file1 : file2;
+    } else if (exists1) {
+      targetFile = file2;
+    } else {
+      targetFile = file1;
+    }
+
+    fs.writeFileSync(targetFile, content);
+    res.json({ message: "Saved to " + path.basename(targetFile) });
+  } catch (err) {
+    console.error("Save auto error:", err);
+    res.status(500).send("Failed to save script auto");
+  }
+});
+
+app.post("/api/save-script", async (req, res) => {
+  const { filename, content } = req.body;
+
+  if (!filename || !content) {
+    return res.status(400).json({ error: "Filename and content are required" });
+  }
+
+  // Sanitize filename to prevent directory traversal
+  const safeFilename = path.basename(filename).replace(/\.[^/.]+$/, "") + ".txt";
+  const filePath = path.join(__dirname, "script_auto", safeFilename);
+
+  try {
+    // Ensure directory exists
+    const dir = path.dirname(filePath);
+    if (!fs.existsSync(dir)) {
+      fs.mkdirSync(dir, { recursive: true });
+    }
+
+    fs.writeFileSync(filePath, content, "utf8");
+    res.json({ message: `Successfully saved to ${safeFilename}` });
+  } catch (err) {
+    console.error("Save script error:", err);
+    res.status(500).json({ error: "Failed to save script on server" });
+  }
+});
+
 /* ================= START ================= */
 
 app.listen(PORT, () => {
