@@ -147,35 +147,30 @@ document.querySelectorAll(".suggestion").forEach(btn => {
 
 /* ================= EXPORT TXT ================= */
 
-const exportBtn = document.getElementById("exportBtn");
+function exportScript() {
 
-exportBtn.addEventListener("click", () => {
+    // Get the generated AI text
+    const text = document.getElementById("output").innerText;
 
-  const botMessages = document.querySelectorAll(".bot");
+    if (!text) {
+        alert("No script to export!");
+        return;
+    }
 
-  if (!botMessages.length) {
-    alert("Nothing to export.");
-    return;
-  }
+    // Create timestamp
+    const timestamp = new Date().toISOString().replace(/[:.]/g, "-");
 
-  let text = "";
+    // Create file
+    const blob = new Blob([text], { type: "text/plain" });
 
-  botMessages.forEach(msg => {
-    text += msg.innerText + "\n\n";
-  });
+    // Create download link
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = timestamp + ".txt";
 
-  const blob = new Blob([text], { type: "text/plain;charset=utf-8" });
+    // Trigger download
+    link.click();
 
-  const url = URL.createObjectURL(blob);
-
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = "ScriptGen_output.txt";
-
-  document.body.appendChild(a);
-  a.click();
-
-  document.body.removeChild(a);
-  URL.revokeObjectURL(url);
-
-});
+    // Cleanup
+    URL.revokeObjectURL(link.href);
+}
