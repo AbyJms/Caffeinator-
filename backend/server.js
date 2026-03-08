@@ -194,3 +194,15 @@ app.post("/api/screengen", upload.single("file"), async (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
+
+const { exec } = require("child_process");
+
+app.get("/run-frame-grabber", (req, res) => {
+  exec("python frame_grabber.py", (error, stdout, stderr) => {
+    if (error) {
+      console.error(error);
+      return res.status(500).send("Error running script");
+    }
+    res.send(stdout || "Frame grabber executed");
+  });
+});
