@@ -451,6 +451,25 @@ app.get("/get-frames", (req, res) => {
 // serve screenshots folder
 app.use("/screenshots", require("express").static(__dirname + "/screenshots"));
 
+// Expose script_auto folder for video/script access
+app.use("/backend/script_auto", require("express").static(path.join(__dirname, "script_auto")));
+
+// Endpoint to generate recap video
+app.post("/api/generate-recap", (req, res) => {
+  const scriptPath = path.join(__dirname, "script_auto", "generate_clips.bat");
+  
+  console.log("Starting video generation...");
+  
+  exec(`"${scriptPath}"`, { cwd: path.join(__dirname, "script_auto") }, (error, stdout, stderr) => {
+    if (error) {
+      console.error("Video generation failed:", error);
+      return res.status(500).json({ error: "Failed to generate video" });
+    }
+    console.log("Video generation finished.");
+    res.json({ status: "done" });
+  });
+});
+
 
 app.post("/generate-storyboard", async (req, res) => {
 
