@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ScriptGen</title>
+
+    <link rel="stylesheet" href="../css/scriptgen.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
+
+    <!-- LOTTIE -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.9.6/lottie.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+
+</head>
+
+<body>
+
+    <div id="particles-js"></div>
+
+    <div class="container">
+
+        <div class="sidebar">
+
+            <div class="logo" onclick="window.location.href = '../index.html'">
+                <div class="logo-icon">M</div>
+                <span>MovCap</span>
+            </div>
+
+            <button class="new-script glow-btn">+ New Recap</button>
+
+            <button class="story-btn" onclick="window.location.href='../pages/storyboard.html'">Go to Story
+                →</button>
+
+            <div class="history">
+
+                <h4>History</h4>
+
+                <ul id="historyList"></ul>
+
+            </div>
+
+            <button id="sidebar-logout" class="logout-btn" style="margin-top: auto; background: rgba(255, 0, 0, 0.1); color: #ff4f4f; border: 1px solid rgba(255, 0, 0, 0.2); padding: 10px; border-radius: 8px; cursor: pointer; display: none;">Logout</button>
+
+        </div>
+
+        <!-- MAIN -->
+
+        <div class="main">
+
+            <div class="header">
+
+                Recap
+
+                <button id="exportBtn">Export Recap</button>
+
+            </div>
+
+            <div class="chat-area" id="chatArea">
+
+                <div class="welcome" id="welcome">
+
+                    <div id="aiAnimation" style="width:120px;margin:auto;"></div>
+
+                    <h1 id="statusText">Create <span>recap video</span></h1>
+
+                    <div class="video-container" id="videoContainer" style="display:none; margin-top:20px;">
+                        <video id="recapVideo" controls style="width:100%; border-radius:12px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+
+                    <div class="recap-controls" id="recapControls" style="margin-top: 30px;">
+                        <button id="generateVideoBtn" class="primary-btn" style="font-size: 24px; padding: 10px 40px; border-radius: 50px;">></button>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+        document.getElementById('generateVideoBtn').addEventListener('click', async () => {
+            const statusText = document.getElementById('statusText');
+            const controls = document.getElementById('recapControls');
+            const videoContainer = document.getElementById('videoContainer');
+            const videoElement = document.getElementById('recapVideo');
+
+            statusText.innerHTML = "Generating <span>video recap</span> of movie...";
+            controls.style.display = 'none';
+
+            try {
+                const response = await fetch('/api/generate-recap', {
+                    method: 'POST'
+                });
+
+                if (response.ok) {
+                    statusText.innerHTML = "Recap <span>Ready</span>";
+                    videoContainer.style.display = 'block';
+                    // Append random query to prevent caching if the file name is same
+                    videoElement.src = "/backend/script_auto/final_move.mkv?t=" + new Date().getTime();
+                    videoElement.play();
+                } else {
+                    statusText.innerHTML = "Video <span>Generation Failed</span>";
+                    controls.style.display = 'block';
+                }
+            } catch (err) {
+                console.error("Recap Error:", err);
+                statusText.innerHTML = "<span>Error</span> Occurred";
+                controls.style.display = 'block';
+            }
+        });
+    </script>
+
+
+
+
+    <script>
+        // Auth & Logout Logic
+        const logoutBtn = document.getElementById('sidebar-logout');
+        if (localStorage.getItem('token')) {
+            logoutBtn.style.display = 'block';
+            logoutBtn.addEventListener('click', () => {
+                if (confirm('Do you really want to logout?')) {
+                    localStorage.removeItem('token');
+                    localStorage.removeItem('user');
+                    alert('You have been logged out.');
+                    window.location.href = '../index.html';
+                }
+            });
+        }
+    </script>
+    <script src="../js/scriptgen.js"></script>
+
+
+</body>
+
+</html>
