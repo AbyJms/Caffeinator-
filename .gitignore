@@ -1,6 +1,9 @@
+# environment files
 .env
 **/.env
-node_modules
-.env
-backend/.env
-.env    
+
+# node dependencies
+node_modules/
+
+# generated videos
+backend/script_auto/*.mkv
