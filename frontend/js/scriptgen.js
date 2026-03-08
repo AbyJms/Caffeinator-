@@ -150,7 +150,7 @@ document.querySelectorAll(".suggestion").forEach(btn => {
 function exportScript() {
 
     // Get the generated AI text
-    const text = document.getElementById("output").innerText;
+    const text = document.getElementById("messages").innerText;
 
     if (!text) {
         alert("No script to export!");
