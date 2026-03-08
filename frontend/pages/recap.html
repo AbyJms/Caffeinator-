@@ -73,35 +73,58 @@
 
                     <div id="aiAnimation" style="width:120px;margin:auto;"></div>
 
-                    <h1>Welcome to <span>Recap</span></h1>
+                    <h1 id="statusText">Create <span>recap video</span></h1>
 
-                    <p>
-                        Enter a movie name, tone, or instructions to generate a cinematic recap script.
-                    </p>
+                    <div class="video-container" id="videoContainer" style="display:none; margin-top:20px;">
+                        <video id="recapVideo" controls style="width:100%; border-radius:12px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
 
-                    <div class="suggestions">
-
-                        <button>Inception</button>
-                        <button>Interstellar</button>
-                        <button>The Dark Knight</button>
-
+                    <div class="recap-controls" id="recapControls" style="margin-top: 30px;">
+                        <button id="generateVideoBtn" class="primary-btn" style="font-size: 24px; padding: 10px 40px; border-radius: 50px;">></button>
                     </div>
 
                 </div>
 
             </div>
 
-            <div class="input-bar">
-
-                <input id="userInput" type="text" placeholder="Enter movie name, tone, or instructions...">
-
-                <button id="sendBtn" class="send-btn">➤</button>
-
-            </div>
-
         </div>
 
     </div>
+
+    <script>
+        document.getElementById('generateVideoBtn').addEventListener('click', async () => {
+            const statusText = document.getElementById('statusText');
+            const controls = document.getElementById('recapControls');
+            const videoContainer = document.getElementById('videoContainer');
+            const videoElement = document.getElementById('recapVideo');
+
+            statusText.innerHTML = "Generating <span>video recap</span> of movie...";
+            controls.style.display = 'none';
+
+            try {
+                const response = await fetch('/api/generate-recap', {
+                    method: 'POST'
+                });
+
+                if (response.ok) {
+                    statusText.innerHTML = "Recap <span>Ready</span>";
+                    videoContainer.style.display = 'block';
+                    // Append random query to prevent caching if the file name is same
+                    videoElement.src = "/backend/script_auto/final_move.mkv?t=" + new Date().getTime();
+                    videoElement.play();
+                } else {
+                    statusText.innerHTML = "Video <span>Generation Failed</span>";
+                    controls.style.display = 'block';
+                }
+            } catch (err) {
+                console.error("Recap Error:", err);
+                statusText.innerHTML = "<span>Error</span> Occurred";
+                controls.style.display = 'block';
+            }
+        });
+    </script>
 
 
 
