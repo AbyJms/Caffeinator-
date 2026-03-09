@@ -17,10 +17,6 @@ const JWT_SECRET = process.env.JWT_SECRET || "fallback_secret";
 
 app.use(cors());
 app.use(express.json());
-app.use(express.static(path.join(__dirname, "public/frontend")));
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "public/frontend/index.html"));
-});
 
 /* ================= DATABASE ================= */
 
@@ -228,17 +224,14 @@ ONLY timestamps list.
 
 app.use(cors());
 app.use(express.json());
-app.use(express.static(path.join(__dirname, "backend/public/frontend"), { index: false }));
+
+app.use(express.static(path.join(__dirname, "../frontend")));
 
 /* ================= FILE UPLOAD ================= */
 
 const upload = multer({ dest: "uploads/" });
 
-/* ================= ROUTES ================= */
 
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "backend/public/frontend/index.html"));
-});
 
 /* ================= CHAT BOT ================= */
 
@@ -477,6 +470,8 @@ app.post("/api/save-script", async (req, res) => {
 
 /* ================= START ================= */
 
+
+
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
@@ -602,7 +597,9 @@ User idea: ${idea}
 }]
 });
 
-res.json(completion);
+res.json({
+  reply: completion.choices[0].message.content
+});
 
 } catch (err) {
 
@@ -611,4 +608,8 @@ res.status(500).send("Storyboard failed");
 
 }
 
+});
+
+app.use((req, res) => {
+  res.sendFile(path.join(__dirname, "../frontend/index.html"));
 });

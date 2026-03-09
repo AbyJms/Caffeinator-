@@ -16,13 +16,13 @@ body: JSON.stringify({ idea })
 
 const data = await response.json();
 
-if (!data.choices) {
-output.innerHTML = "Backend Error";
-console.log(data);
-return;
+if (!data.reply) {
+  output.innerHTML = "Backend Error";
+  console.log(data);
+  return;
 }
 
-const text = data.choices[0].message.content;
+const text = data.reply;
 
 // 🔥 RUN PYTHON (screenshots)
 await fetch("http://localhost:3000/run-frame-grabber");
